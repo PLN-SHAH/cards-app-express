@@ -3,8 +3,7 @@ const uid = require("uid");
 
 const app = express();
 app.use(express.json());
-
-let i = 0;
+app.use(express.static("./dist"));
 
 let users = [
   { name: "Joe", role: "mechanic", id: uid() },
@@ -12,10 +11,6 @@ let users = [
   { name: "Jan", role: "assistant coach", id: uid() },
   { name: "Dalia", role: "boss", id: uid() }
 ];
-
-app.get("/", (req, res) => {
-  res.send(`Hello world ${i++}`);
-});
 
 app.get("/users", (req, res) => {
   res.json(users);
@@ -28,7 +23,7 @@ app.get("/users/:id", (req, res) => {
 
 //new user
 app.post("/users", (req, res) => {
-  let newUser = req.body;
+  const newUser = req.body; //let
   newUser.id = uid();
   console.log(newUser);
   users = [...users, newUser];
