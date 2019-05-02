@@ -1,10 +1,18 @@
 const fs = require("fs");
-let actualCount = 0;
 
-fs.readFile(__dirname + "/counter.txt", "utf8", (err, data) => {
+const filePath = __dirname + "/counter.txt";
+
+fs.readFile(filePath, "utf8", (err, text) => {
   if (err) {
-    console.log("it was an error");
+    writeFile(0);
   } else {
-    console.log(data);
+    const num = Number(text[text.length - 1]);
+    writeFile(num + 1);
   }
 });
+
+function writeFile(count) {
+  fs.writeFile(filePath, `Last count was ${count}`, err => {
+    console.log("File created", filePath, count);
+  });
+}
