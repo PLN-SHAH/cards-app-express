@@ -134,11 +134,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var Card =
 /*#__PURE__*/
 function () {
-  function Card(title, text) {
+  function Card(title, text, category) {
     _classCallCheck(this, Card);
 
     this.title = title;
     this.text = text;
+    this.category = category;
     this.render();
   }
 
@@ -148,7 +149,7 @@ function () {
       var cardHTML = document.createElement("section");
       var cardsContainer = document.querySelector(".cards");
       cardHTML.className = "card";
-      cardHTML.innerHTML = "\n        <button class=\"card__button-close\">x</button>\n        <h3 class=\"card__title\">".concat(this.title, "</h3>\n        <p class=\"card__text\">").concat(this.text, "</p>");
+      cardHTML.innerHTML = "\n        <button class=\"card__button-close\">x</button>\n        <h3 class=\"card__title\">".concat(this.title, "</h3>\n        <p class=\"card__text\">").concat(this.text, "</p>\n        <p class=\"card__category\">").concat(this.category, "</p>");
       cardsContainer.appendChild(cardHTML);
     }
   }]);
@@ -157,15 +158,16 @@ function () {
 }();
 
 exports.Card = Card;
-var card2 = new Card("Lorem ipsum2", "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.");
-var card3 = new Card("Lorem ipsum3", "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.");
+var card2 = new Card("Lorem ipsum2", "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.", "somecategory");
+var card3 = new Card("Lorem ipsum3", "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.", "somecategory");
 console.log("form");
 var form = document.querySelector("form");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   var _event$target = event.target,
       titleEl = _event$target.title,
-      textEl = _event$target.text;
+      textEl = _event$target.text,
+      categoryEl = _event$target.category;
   fetch("/cards", {
     method: "POST",
     headers: {
@@ -173,16 +175,17 @@ form.addEventListener("submit", function (event) {
     },
     body: JSON.stringify({
       title: titleEl.value,
-      text: textEl.value
+      text: textEl.value,
+      category: categoryEl
     })
   }).then(function (res) {
     return res.json();
-  }).then(function (createdUser) {
-    return console.log(createdUser);
+  }).then(function (createdCard) {
+    return console.log(createdCard);
   }).catch(function (err) {
     return console.log(err);
   });
-  new Card(titleEl.value, textEl.value);
+  new Card(titleEl.value, textEl.value, categoryEl.value);
 });
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

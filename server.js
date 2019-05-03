@@ -6,8 +6,9 @@ app.use(express.json());
 app.use(express.static("./dist"));
 
 let cards = [
-  { title: "card_one", text: "card_one_text", id: uid() },
-  { title: "card_two", text: "card_two_text", id: uid() }
+  { title: "card_one", text: "card_one_text", id: uid(), category: "1" },
+  { title: "card_two", text: "card_two_text", id: uid(), category: "2" },
+  { title: "card_three", text: "card_three_text", id: uid(), category: "3" }
 ];
 
 app.get("/cards", (req, res) => {
@@ -29,10 +30,12 @@ app.post("/cards", (req, res) => {
 
 //delete user
 app.delete("/cards", (req, res) => {
-  const { title, text } = req.body;
-  //return array withpout element
-  cards = cards.filter(card => card.title !== title && card.text !== text);
-  console.log(cards, "after filter");
+  const { title, text, category } = req.body;
+  //return array without element
+  cards = cards.filter(
+    card =>
+      card.title !== title && card.text !== text && card.category !== category
+  );
   res.json(cards);
 });
 
