@@ -1,19 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title></title>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Cards App Express</title>
         <link rel="stylesheet" href="/styles.164d45a1.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,400">
     <script src="/styles.164d45a1.js"></script></head>
-
     <body>
-        <form action="">
-            <input name="name" placeholder="name here" type="text"><input name="role" placeholder="role here" type="text"><button>Create
-                user</button>
+        <!--<form action="">
+            <input name="name" placeholder="name here" type="text"><input
+                name="role" placeholder="role here" type="text"><button>Create
+                user x</button>
+        </form> -->
+        <form class="card-form">
+            <section class="card-form__title">
+                <label class="card-form__lable-title" for="title">Title</label>
+                <input class="card-form__input-title" type="text" name="text" id="title" placeholder="The night" required="">
+            </section>
+
+            <section class="card-form__text">
+                <label class="card-form__lable-text" for="text">Text</label>
+                <textarea class="card-form__input-text" name="text" id="text" placeholder="It was a dark and stormy night...."></textarea>
+            </section>
+
+            <section class="card-form__checkbox">
+                <input class="card-form__input-checkbox" id="checkbox-create" type="checkbox">
+                <label class="card-form__lable-checkbox" for="checkbox-create">Do you want to bookmark?</label>
+            </section>
+
+            <button class="card-form__input-submit" type="submit" id="checkbox-create">
+                Create
+            </button>
         </form>
 
-        <script src="/main.1f19ae8e.js">
-</script>
+        <script src="/main.1f19ae8e.js"></script>
     </body>
-
 </html>
