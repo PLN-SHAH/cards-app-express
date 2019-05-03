@@ -23,7 +23,6 @@ app.get("/cards/:title", (req, res) => {
 app.post("/cards", (req, res) => {
   const newCard = req.body; //let
   newCard.id = uid();
-  console.log(newCard);
   cards = [...cards, newCard];
   res.json(newCard);
 });
@@ -31,5 +30,3 @@ app.post("/cards", (req, res) => {
 app.listen(3000, err => {
   err ? console.log(err) : console.log("Server ready");
 });
-
-console.log(cards);

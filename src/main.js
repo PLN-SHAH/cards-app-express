@@ -33,14 +33,14 @@ form.addEventListener("submit", event => {
   const { title: titleEl, text: textEl } = event.target;
   console.log(titleEl, textEl);
 
-  /*fetch("/users", {
+  fetch("/cards", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ name: nameEl.value, role: roleEl.value })
+    body: JSON.stringify({ title: titleEl.value, text: textEl.value })
   })
     .then(res => res.json())
     .then(createdUser => console.log(createdUser))
-    .catch(err => console.log(err));*/
+    .catch(err => console.log(err));
 });

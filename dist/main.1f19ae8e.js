@@ -153,16 +153,22 @@ form.addEventListener("submit", function (event) {
       titleEl = _event$target.title,
       textEl = _event$target.text;
   console.log(titleEl, textEl);
-  /*fetch("/users", {
+  fetch("/cards", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ name: nameEl.value, role: roleEl.value })
-  })
-    .then(res => res.json())
-    .then(createdUser => console.log(createdUser))
-    .catch(err => console.log(err));*/
+    body: JSON.stringify({
+      title: titleEl.value,
+      text: textEl.value
+    })
+  }).then(function (res) {
+    return res.json();
+  }).then(function (createdUser) {
+    return console.log(createdUser);
+  }).catch(function (err) {
+    return console.log(err);
+  });
 });
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
