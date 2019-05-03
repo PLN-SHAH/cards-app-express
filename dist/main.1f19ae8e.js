@@ -141,9 +141,26 @@ function () {
     this.text = text;
     this.category = category;
     this.render();
+    this.renderData();
   }
 
   _createClass(Card, [{
+    key: "renderData",
+    value: function renderData() {
+      fetch("/cards").then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        console.log("data is ", data[0].title);
+        data.forEach(function (card) {
+          var cardHTML = document.createElement("section");
+          var cardsContainer = document.querySelector(".cards");
+          cardHTML.className = "card";
+          cardHTML.innerHTML = "\n            <button class=\"card__button-close\">x</button>\n            <h3 class=\"card__title\">".concat(card.title, "</h3>\n            <p class=\"card__text\">").concat(card.text, "</p>\n            <p class=\"card__category\">").concat(card.category, "</p>");
+          cardsContainer.appendChild(cardHTML);
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var cardHTML = document.createElement("section");
@@ -156,11 +173,17 @@ function () {
 
   return Card;
 }();
+/*
+const card = new Card(
+  "Lorem ipsum",
+  "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+  "somecategory"
+);
+*/
+
 
 exports.Card = Card;
 var card2 = new Card("Lorem ipsum2", "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.", "somecategory");
-var card3 = new Card("Lorem ipsum3", "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.", "somecategory");
-console.log("form");
 var form = document.querySelector("form");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
