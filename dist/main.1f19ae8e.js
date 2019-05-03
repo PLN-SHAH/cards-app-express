@@ -117,7 +117,12 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"main.js":[function(require,module,exports) {
+})({"js/Card.js":[function(require,module,exports) {
+console.log("card");
+},{}],"js/Cardlist.js":[function(require,module,exports) {
+console.log("cardlist");
+},{}],"js/Form.js":[function(require,module,exports) {
+console.log("form");
 var form = document.querySelector("form");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -141,7 +146,19 @@ form.addEventListener("submit", function (event) {
     return console.log(err);
   });
 });
-},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"js/App.js":[function(require,module,exports) {
+"use strict";
+
+require("./Card");
+
+require("./Cardlist");
+
+require("./Form");
+},{"./Card":"js/Card.js","./Cardlist":"js/Cardlist.js","./Form":"js/Form.js"}],"main.js":[function(require,module,exports) {
+"use strict";
+
+require("./js/App");
+},{"./js/App":"js/App.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -169,7 +186,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52625" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53516" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
