@@ -146,11 +146,11 @@ function () {
     key: "render",
     value: function render() {
       var cardHTML = document.createElement("section");
+      var cardsContainer = document.querySelector(".cards");
       cardHTML.className = "card";
-      cardHTML.innerHTML = "\n        <button class=\"bookmark\"></button>\n        <h3 class=\"card__title\">".concat(this.title, "</h3>\n        <p class=\"card__text\">").concat(this.text, "</p>");
-      document.body.appendChild(cardHTML);
-    } //createCard() {}
-
+      cardHTML.innerHTML = "\n        <button class=\"card__button-close\">x</button>\n        <h3 class=\"card__title\">".concat(this.title, "</h3>\n        <p class=\"card__text\">").concat(this.text, "</p>");
+      cardsContainer.appendChild(cardHTML);
+    }
   }]);
 
   return Card;

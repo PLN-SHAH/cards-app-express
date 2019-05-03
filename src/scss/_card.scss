@@ -8,26 +8,6 @@
   position: relative;
 }
 
-.bookmark {
-  position: absolute;
-  background: grey;
-  width: 24px;
-  height: 20px;
-  border: none;
-  right: 20px;
-  top: -10px;
-}
-.bookmark.active {
-  background: yellow;
-}
-.bookmark::after {
-  content: "";
-  border: 12px solid grey;
-  border-bottom-color: transparent;
-  position: absolute;
-  top: 100%;
-  left: 0;
-}
 .bookmark.active::after {
   border-color: yellow;
   border-bottom-color: transparent;
@@ -46,4 +26,15 @@
   text-align: center;
   font-weight: 100;
   margin-bottom: 0;
+}
+
+.cards {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.card__button-close {
+  align-self: flex-end;
+  width: 20px;
+  height: 20px;
 }

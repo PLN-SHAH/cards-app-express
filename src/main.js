@@ -7,16 +7,15 @@ export class Card {
 
   render() {
     const cardHTML = document.createElement("section");
+    const cardsContainer = document.querySelector(".cards");
     cardHTML.className = "card";
     cardHTML.innerHTML = `
-        <button class="bookmark"></button>
+        <button class="card__button-close">x</button>
         <h3 class="card__title">${this.title}</h3>
         <p class="card__text">${this.text}</p>`;
 
-    document.body.appendChild(cardHTML);
+    cardsContainer.appendChild(cardHTML);
   }
-
-  //createCard() {}
 }
 
 const card2 = new Card(
