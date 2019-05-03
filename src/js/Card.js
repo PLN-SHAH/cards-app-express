@@ -7,8 +7,6 @@ export class Card {
     this.render();
   }
 
-  //onsubmit als callback wenn fertig und gebe mit was in den inputs steht
-
   render() {
     const cardHTML = document.createElement("section");
     cardHTML.className = "card";
@@ -22,14 +20,14 @@ export class Card {
 }
 
 const card2 = new Card(
-  "Lorem ipsum",
+  "Lorem ipsum2",
   "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 );
-document.body.appendChild(card2);
 
 const card3 = new Card(
-  "Lorem ipsum",
+  "Lorem ipsum3",
   "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 );
 
-document.body.appendChild(card3);
+document.body.insertAdjacentElement("beforeend", card2);
+document.body.insertAdjacentElement("beforeend", card3);
