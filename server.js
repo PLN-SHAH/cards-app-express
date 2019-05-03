@@ -5,33 +5,31 @@ const app = express();
 app.use(express.json());
 app.use(express.static("./dist"));
 
-let users = [
-  { name: "Joe", role: "mechanic", id: uid() },
-  { name: "Dr. Who", role: "time traveller", id: uid() },
-  { name: "Jan", role: "assistant coach", id: uid() },
-  { name: "Dalia", role: "boss", id: uid() }
+let cards = [
+  { title: "card_one", text: "card_one_text", id: uid() },
+  { title: "card_two", text: "card_two_text", id: uid() }
 ];
 
-app.get("/users", (req, res) => {
-  res.json(users);
+app.get("/cards", (req, res) => {
+  res.json(cards);
 });
 
-app.get("/users/:id", (req, res) => {
-  const { id } = req.params;
-  res.json(users.find(user => user.id === id));
+app.get("/cards/:title", (req, res) => {
+  const { title } = req.params;
+  res.json(cards.find(user => user.title === title));
 });
 
 //new user
-app.post("/users", (req, res) => {
-  const newUser = req.body; //let
-  newUser.id = uid();
-  console.log(newUser);
-  users = [...users, newUser];
-  res.json(newUser);
+app.post("/cards", (req, res) => {
+  const newCard = req.body; //let
+  newCard.id = uid();
+  console.log(newCard);
+  cards = [...cards, newCard];
+  res.json(newCard);
 });
 
 app.listen(3000, err => {
   err ? console.log(err) : console.log("Server ready");
 });
 
-console.log(users);
+console.log(cards);

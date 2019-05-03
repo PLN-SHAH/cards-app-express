@@ -119,33 +119,50 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"main.js":[function(require,module,exports) {
 console.log("Hello world");
-fetch("/users").then(function (res) {
-  return res.json();
-}).then(function (data) {
-  return console.log(data);
-});
-var form = document.querySelector("form");
-form.addEventListener("submit", function (event) {
+/*
+fetch("/users")
+  .then(res => res.json())
+  .then(data => console.log(data));
+
+const form = document.querySelector("form");
+form.addEventListener("submit", event => {
   event.preventDefault();
-  var _event$target = event.target,
-      nameEl = _event$target.name,
-      roleEl = _event$target.role;
+  const { name: nameEl, role: roleEl } = event.target;
   fetch("/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({
-      name: nameEl.value,
-      role: roleEl.value
-    })
-  }).then(function (res) {
-    return res.json();
-  }).then(function (createdUser) {
-    return console.log(createdUser);
-  }).catch(function (err) {
-    return console.log(err);
-  });
+    body: JSON.stringify({ name: nameEl.value, role: roleEl.value })
+  })
+    .then(res => res.json())
+    .then(createdUser => console.log(createdUser))
+    .catch(err => console.log(err));
+});*/
+
+/*
+fetch("/")
+  .then(res => res.json())
+  .then(data => console.log(data));*/
+
+var form = document.querySelector("form");
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  console.log("click button form");
+  var _event$target = event.target,
+      titleEl = _event$target.title,
+      textEl = _event$target.text;
+  console.log(titleEl, textEl);
+  /*fetch("/users", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ name: nameEl.value, role: roleEl.value })
+  })
+    .then(res => res.json())
+    .then(createdUser => console.log(createdUser))
+    .catch(err => console.log(err));*/
 });
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -175,7 +192,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61873" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52625" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
