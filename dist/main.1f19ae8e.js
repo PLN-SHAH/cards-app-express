@@ -118,7 +118,51 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"js/Card.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Card = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 console.log("card");
+
+var Card =
+/*#__PURE__*/
+function () {
+  function Card(title, text) {
+    _classCallCheck(this, Card);
+
+    this.title = title;
+    this.text = text;
+    this.render();
+  } //onsubmit als callback wenn fertig und gebe mit was in den inputs steht
+
+
+  _createClass(Card, [{
+    key: "render",
+    value: function render() {
+      var cardHTML = document.createElement("section");
+      cardHTML.className = "card";
+      cardHTML.innerHTML = "\n        <button class=\"bookmark\"></button>\n        <h3 class=\"card__title\">".concat(this.title, "</h3>\n        <p class=\"card__text\">").concat(this.text, "</p>");
+      document.body.appendChild(cardHTML);
+    }
+  }]);
+
+  return Card;
+}();
+
+exports.Card = Card;
+var card2 = new Card("Lorem ipsum", "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.");
+document.body.appendChild(card2);
+var card3 = new Card("Lorem ipsum", "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.");
+document.body.appendChild(card3);
 },{}],"js/Cardlist.js":[function(require,module,exports) {
 console.log("cardlist");
 },{}],"js/Form.js":[function(require,module,exports) {
@@ -154,6 +198,9 @@ require("./Card");
 require("./Cardlist");
 
 require("./Form");
+
+var testcard = new Card("testtile", "testtext");
+document.body.appendChild(testcard);
 },{"./Card":"js/Card.js","./Cardlist":"js/Cardlist.js","./Form":"js/Form.js"}],"main.js":[function(require,module,exports) {
 "use strict";
 

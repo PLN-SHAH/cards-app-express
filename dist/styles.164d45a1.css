@@ -63,4 +63,57 @@ body {
   color: #fff;
 }
 
+.card {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  margin: 20px;
+  border-radius: 2%;
+  box-shadow: -3px 2px 10px #cacfd1;
+  position: relative;
+}
+
+.bookmark {
+  position: absolute;
+  background: grey;
+  width: 24px;
+  height: 20px;
+  border: none;
+  right: 20px;
+  top: -10px;
+}
+
+.bookmark.active {
+  background: yellow;
+}
+
+.bookmark::after {
+  content: "";
+  border: 12px solid grey;
+  border-bottom-color: transparent;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.bookmark.active::after {
+  border-color: yellow;
+  border-bottom-color: transparent;
+}
+
+.card__text {
+  padding: 10px;
+  margin: 0;
+  color: #4f5b9c;
+}
+
+.card__title {
+  background-color: #4f5b9c;
+  color: white;
+  height: 30px;
+  text-align: center;
+  font-weight: 100;
+  margin-bottom: 0;
+}
+
 /*# sourceMappingURL=/styles.164d45a1.css.map */
