@@ -123,7 +123,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Card = void 0;
+exports.Card = exports.Cards = void 0;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -131,20 +131,16 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var Card =
+var Cards =
 /*#__PURE__*/
 function () {
-  function Card(title, text, category) {
-    _classCallCheck(this, Card);
+  function Cards() {
+    _classCallCheck(this, Cards);
 
-    this.title = title;
-    this.text = text;
-    this.category = category;
-    this.render();
     this.renderData();
   }
 
-  _createClass(Card, [{
+  _createClass(Cards, [{
     key: "renderData",
     value: function renderData() {
       fetch("/cards").then(function (res) {
@@ -160,30 +156,13 @@ function () {
         });
       });
     }
-  }, {
-    key: "render",
-    value: function render() {
-      var cardHTML = document.createElement("section");
-      var cardsContainer = document.querySelector(".cards");
-      cardHTML.className = "card";
-      cardHTML.innerHTML = "\n        <button class=\"card__button-close\">x</button>\n        <h3 class=\"card__title\">".concat(this.title, "</h3>\n        <p class=\"card__text\">").concat(this.text, "</p>\n        <p class=\"card__category\">").concat(this.category, "</p>");
-      cardsContainer.appendChild(cardHTML);
-    }
   }]);
 
-  return Card;
+  return Cards;
 }();
-/*
-const card = new Card(
-  "Lorem ipsum",
-  "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-  "somecategory"
-);
-*/
 
-
-exports.Card = Card;
-var card2 = new Card("Lorem ipsum2", "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.", "somecategory");
+exports.Cards = Cards;
+new Cards();
 var form = document.querySelector("form");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -210,6 +189,34 @@ form.addEventListener("submit", function (event) {
   });
   new Card(titleEl.value, textEl.value, categoryEl.value);
 });
+
+var Card =
+/*#__PURE__*/
+function () {
+  function Card(title, text, category) {
+    _classCallCheck(this, Card);
+
+    this.title = title;
+    this.text = text;
+    this.category = category;
+    this.render();
+  }
+
+  _createClass(Card, [{
+    key: "render",
+    value: function render() {
+      var cardHTML = document.createElement("section");
+      var cardsContainer = document.querySelector(".cards");
+      cardHTML.className = "card";
+      cardHTML.innerHTML = "\n        <button class=\"card__button-close\">x</button>\n        <h3 class=\"card__title\">".concat(this.title, "</h3>\n        <p class=\"card__text\">").concat(this.text, "</p>\n        <p class=\"card__category\">").concat(this.category, "</p>");
+      cardsContainer.appendChild(cardHTML);
+    }
+  }]);
+
+  return Card;
+}();
+
+exports.Card = Card;
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -238,7 +245,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53516" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59444" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

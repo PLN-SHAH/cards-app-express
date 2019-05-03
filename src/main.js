@@ -1,9 +1,5 @@
-export class Card {
-  constructor(title, text, category) {
-    this.title = title;
-    this.text = text;
-    this.category = category;
-    this.render();
+export class Cards {
+  constructor() {
     this.renderData();
   }
 
@@ -27,34 +23,9 @@ export class Card {
         });
       });
   }
-  render() {
-    const cardHTML = document.createElement("section");
-    const cardsContainer = document.querySelector(".cards");
-    cardHTML.className = "card";
-    cardHTML.innerHTML = `
-        <button class="card__button-close">x</button>
-        <h3 class="card__title">${this.title}</h3>
-        <p class="card__text">${this.text}</p>
-        <p class="card__category">${this.category}</p>`;
-
-    cardsContainer.appendChild(cardHTML);
-  }
 }
 
-/*
-const card = new Card(
-  "Lorem ipsum",
-  "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-  "somecategory"
-);
-*/
-
-const card2 = new Card(
-  "Lorem ipsum2",
-  "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-  "somecategory"
-);
-
+new Cards();
 const form = document.querySelector("form");
 
 form.addEventListener("submit", event => {
@@ -78,3 +49,25 @@ form.addEventListener("submit", event => {
 
   new Card(titleEl.value, textEl.value, categoryEl.value);
 });
+
+export class Card {
+  constructor(title, text, category) {
+    this.title = title;
+    this.text = text;
+    this.category = category;
+    this.render();
+  }
+
+  render() {
+    const cardHTML = document.createElement("section");
+    const cardsContainer = document.querySelector(".cards");
+    cardHTML.className = "card";
+    cardHTML.innerHTML = `
+        <button class="card__button-close">x</button>
+        <h3 class="card__title">${this.title}</h3>
+        <p class="card__text">${this.text}</p>
+        <p class="card__category">${this.category}</p>`;
+
+    cardsContainer.appendChild(cardHTML);
+  }
+}
