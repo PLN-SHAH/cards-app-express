@@ -118,41 +118,12 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"main.js":[function(require,module,exports) {
-console.log("Hello world");
-/*
-fetch("/users")
-  .then(res => res.json())
-  .then(data => console.log(data));
-
-const form = document.querySelector("form");
-form.addEventListener("submit", event => {
-  event.preventDefault();
-  const { name: nameEl, role: roleEl } = event.target;
-  fetch("/users", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ name: nameEl.value, role: roleEl.value })
-  })
-    .then(res => res.json())
-    .then(createdUser => console.log(createdUser))
-    .catch(err => console.log(err));
-});*/
-
-/*
-fetch("/")
-  .then(res => res.json())
-  .then(data => console.log(data));*/
-
 var form = document.querySelector("form");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
-  console.log("click button form");
   var _event$target = event.target,
       titleEl = _event$target.title,
       textEl = _event$target.text;
-  console.log(titleEl, textEl);
   fetch("/cards", {
     method: "POST",
     headers: {

@@ -27,6 +27,14 @@ app.post("/cards", (req, res) => {
   res.json(newCard);
 });
 
+//delete user
+app.delete("/cards", (req, res) => {
+  const { title, text } = req.body;
+  cards = cards.filter(card => card.title !== title && card.text !== text);
+  console.log(cards, "after filter");
+  res.json(cards);
+});
+
 app.listen(3000, err => {
   err ? console.log(err) : console.log("Server ready");
 });
