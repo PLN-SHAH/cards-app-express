@@ -30,6 +30,7 @@ app.post("/cards", (req, res) => {
 //delete user
 app.delete("/cards", (req, res) => {
   const { title, text } = req.body;
+  //return array withpout element
   cards = cards.filter(card => card.title !== title && card.text !== text);
   console.log(cards, "after filter");
   res.json(cards);

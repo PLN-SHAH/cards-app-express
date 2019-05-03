@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/Card.js":[function(require,module,exports) {
+})({"main.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -130,8 +130,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-console.log("card");
 
 var Card =
 /*#__PURE__*/
@@ -151,7 +149,8 @@ function () {
       cardHTML.className = "card";
       cardHTML.innerHTML = "\n        <button class=\"bookmark\"></button>\n        <h3 class=\"card__title\">".concat(this.title, "</h3>\n        <p class=\"card__text\">").concat(this.text, "</p>");
       document.body.appendChild(cardHTML);
-    }
+    } //createCard() {}
+
   }]);
 
   return Card;
@@ -160,11 +159,6 @@ function () {
 exports.Card = Card;
 var card2 = new Card("Lorem ipsum2", "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.");
 var card3 = new Card("Lorem ipsum3", "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.");
-document.body.insertAdjacentElement("beforeend", card2);
-document.body.insertAdjacentElement("beforeend", card3);
-},{}],"js/Cardlist.js":[function(require,module,exports) {
-console.log("cardlist");
-},{}],"js/Form.js":[function(require,module,exports) {
 console.log("form");
 var form = document.querySelector("form");
 form.addEventListener("submit", function (event) {
@@ -188,35 +182,9 @@ form.addEventListener("submit", function (event) {
   }).catch(function (err) {
     return console.log(err);
   });
+  new Card(titleEl.value, textEl.value);
 });
-},{}],"js/App.js":[function(require,module,exports) {
-"use strict";
-
-require("./Card");
-
-require("./Cardlist");
-
-require("./Form");
-
-var testcard = new Card("testtile", "testtext");
-document.body.appendChild(testcard);
-},{"./Card":"js/Card.js","./Cardlist":"js/Cardlist.js","./Form":"js/Form.js"}],"main.js":[function(require,module,exports) {
-"use strict";
-
-require("./js/App");
-
-require("./js/Card");
-
-require("./js/Cardlist");
-
-require("./js/Form");
-
-//if getreqest -> load cards
-var card2 = new Card("Lorem ipsum2", "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.");
-var card3 = new Card("Lorem ipsum3", "voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.");
-document.body.insertAdjacentElement("beforeend", card2);
-document.body.insertAdjacentElement("beforeend", card3);
-},{"./js/App":"js/App.js","./js/Card":"js/Card.js","./js/Cardlist":"js/Cardlist.js","./js/Form":"js/Form.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
