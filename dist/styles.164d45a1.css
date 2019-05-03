@@ -29,7 +29,7 @@ body {
   flex-direction: column;
 }
 
-.card-form__input-title {
+.card-form__title__input {
   border: 1px solid #4f5b9c;
   letter-spacing: 1px;
   margin-bottom: 10px;
@@ -42,23 +42,20 @@ body {
   flex-direction: column;
 }
 
-.card-form__input-title::placeholder,
-.card-form__input-text::placeholder {
+.card-form__title__input::placeholder,
+.card-form__textarea::placeholder {
   color: #ccc;
 }
 
-.card-form__input-text {
+.card-form__textarea {
   height: 170px;
   font-size: 1em;
   border: 1px solid #4f5b9c;
   padding: 5px;
 }
 
-.card-form__checkbox {
-  margin: 20px 0;
-}
-
-.card-form__input-submit {
+.card-form__button {
+  margin-top: 30px;
   outline: none;
   background: #59abe3;
   font-size: 1em;
