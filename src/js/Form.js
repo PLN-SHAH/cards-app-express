@@ -1,6 +1,6 @@
 import { CardList } from "./CardList.js";
 
-const form = document.querySelector("form");
+const form = document.querySelector(".card-form");
 
 form.addEventListener("submit", event => {
   event.preventDefault();
@@ -17,8 +17,8 @@ form.addEventListener("submit", event => {
       category: categoryEl
     })
   })
-    .then(res => res.json())
-    .catch(err => console.log(err));
+    .then(res => console.log(res))
+    .then(data => console.log(data));
   new CardList();
 });
 

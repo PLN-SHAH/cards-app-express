@@ -9,18 +9,34 @@ export class Card {
   render() {
     const cardsContainer = document.querySelector(".cards");
     const cardHTML = document.createElement("section");
-
     const buttonDelete = document.createElement("button");
-    buttonDelete.classList = "card__button-close";
+
+    buttonDelete.className = "card__button-close";
+    cardHTML.className = "card";
+
     buttonDelete.innerHTML = "x";
 
-    cardHTML.className = "card";
+    buttonDelete.addEventListener("click", event => {
+      const promise = fetch("/cards/", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ title: "Card1" })
+      })
+        .then(res => res.json())
+        .then(data => console.log("this is data obj", data));
+      console.log(promise);
+      event.target.parentNode.remove();
+    });
+
     cardHTML.innerHTML = `<section class="card__meta">
-    <span class="card__category">${this.category}</span>
-    </section>
-          <h3 class="card__title">${this.title}</h3>
-          <p class="card__text">${this.text}</p>
-          `;
+                             <span class="card__category">
+                             ${this.category}
+                             </span>
+                          </section>
+                          <h3 class="card__title">${this.title}</h3>
+                          <p class="card__text">${this.text}</p> `;
     cardHTML.appendChild(buttonDelete);
     cardsContainer.appendChild(cardHTML);
   }

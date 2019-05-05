@@ -7,19 +7,19 @@ app.use(express.static("./dist"));
 
 let cards = [
   {
-    title: "Lorem Ipsum",
+    title: "Card1",
     text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr",
     id: uid(),
     category: "done"
   },
   {
-    title: "Lorem",
+    title: "Card2",
     text: "sed diam nonumy eirmod tempor invidunt ut labore",
     id: uid(),
     category: "done"
   },
   {
-    title: "Ipsum",
+    title: "Card3",
     text: " dolor sit amet. Lorem ipsum dolor sit",
     id: uid(),
     category: "doing"
@@ -32,7 +32,7 @@ app.get("/cards", (req, res) => {
 
 app.get("/cards/:title", (req, res) => {
   const { title } = req.params;
-  res.json(cards.find(user => user.title === title));
+  res.json(cards.find(card => card.title === title));
 });
 
 //new user
@@ -43,7 +43,7 @@ app.post("/cards", (req, res) => {
   res.json(newCard);
 });
 
-//delete user
+//delete card
 app.delete("/cards", (req, res) => {
   const { title, text, category } = req.body;
   //return array without element

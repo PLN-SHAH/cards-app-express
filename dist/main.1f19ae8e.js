@@ -149,10 +149,27 @@ function () {
       var cardsContainer = document.querySelector(".cards");
       var cardHTML = document.createElement("section");
       var buttonDelete = document.createElement("button");
-      buttonDelete.classList = "card__button-close";
-      buttonDelete.innerHTML = "x";
+      buttonDelete.className = "card__button-close";
       cardHTML.className = "card";
-      cardHTML.innerHTML = "<section class=\"card__meta\">\n    <span class=\"card__category\">".concat(this.category, "</span>\n    </section>\n          <h3 class=\"card__title\">").concat(this.title, "</h3>\n          <p class=\"card__text\">").concat(this.text, "</p>\n          ");
+      buttonDelete.innerHTML = "x";
+      buttonDelete.addEventListener("click", function (event) {
+        var promise = fetch("/cards/", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            title: "Card1"
+          })
+        }).then(function (res) {
+          return res.json();
+        }).then(function (data) {
+          return console.log("this is data obj", data);
+        });
+        console.log(promise);
+        event.target.parentNode.remove();
+      });
+      cardHTML.innerHTML = "<section class=\"card__meta\">\n                             <span class=\"card__category\">\n                             ".concat(this.category, "\n                             </span>\n                          </section>\n                          <h3 class=\"card__title\">").concat(this.title, "</h3>\n                          <p class=\"card__text\">").concat(this.text, "</p> ");
       cardHTML.appendChild(buttonDelete);
       cardsContainer.appendChild(cardHTML);
     }
@@ -228,7 +245,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var form = document.querySelector("form");
+var form = document.querySelector(".card-form");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   var _event$target = event.target,
@@ -246,9 +263,9 @@ form.addEventListener("submit", function (event) {
       category: categoryEl
     })
   }).then(function (res) {
-    return res.json();
-  }).catch(function (err) {
-    return console.log(err);
+    return console.log(res);
+  }).then(function (data) {
+    return console.log(data);
   });
   new _CardList.CardList();
 });
@@ -370,7 +387,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62678" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64523" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
