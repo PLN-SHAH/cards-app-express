@@ -117,36 +117,8 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/Card.js":[function(require,module,exports) {
-/* import "./Cardlist";
-import "./Form";
-
-export class Card {
-  constructor(title, text, category) {
-    this.title = title;
-    this.text = text;
-    this.category = category;
-    this.render();
-  }
-
-  render() {
-    const cardHTML = document.createElement("section");
-    const cardsContainer = document.querySelector(".cards");
-    cardHTML.className = "card";
-    cardHTML.innerHTML = `
-          <button class="card__button-close">x</button>
-          <h3 class="card__title">${this.title}</h3>
-          <p class="card__text">${this.text}</p>
-          <p class="card__category">${this.category}</p>`;
-
-    cardsContainer.appendChild(cardHTML);
-  }
-}
- */
-},{}],"js/Form.js":[function(require,module,exports) {
+})({"js/Form.js":[function(require,module,exports) {
 "use strict";
-
-require("./Card.js");
 
 var _CardList = require("./CardList.js");
 
@@ -169,14 +141,53 @@ form.addEventListener("submit", function (event) {
     })
   }).then(function (res) {
     return res.json();
-  }).then(function (createdCard) {
-    return console.log("this is created card ", createdCard);
   }).catch(function (err) {
     return console.log(err);
   });
   new _CardList.CardList();
 });
-},{"./Card.js":"js/Card.js","./CardList.js":"js/CardList.js"}],"js/CardList.js":[function(require,module,exports) {
+},{"./CardList.js":"js/CardList.js"}],"js/Card.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Card = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Card =
+/*#__PURE__*/
+function () {
+  function Card(title, text, category) {
+    _classCallCheck(this, Card);
+
+    this.title = title;
+    this.text = text;
+    this.category = category;
+    this.render(title, text, category);
+  }
+
+  _createClass(Card, [{
+    key: "render",
+    value: function render() {
+      var cardsContainer = document.querySelector(".cards");
+      var cardHTML = document.createElement("section");
+      cardHTML.className = "card";
+      cardHTML.innerHTML = "\n          <button class=\"card__button-close\">x</button>\n          <h3 class=\"card__title\">".concat(this.title, "</h3>\n          <p class=\"card__text\">").concat(this.text, "</p>\n          <p class=\"card__category\">").concat(this.category, "</p>");
+      cardsContainer.appendChild(cardHTML);
+    }
+  }]);
+
+  return Card;
+}();
+
+exports.Card = Card;
+},{}],"js/CardList.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -184,15 +195,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.CardList = void 0;
 
-require("./Card");
-
 require("./Form");
+
+var _Card = require("./Card");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var cardsContainer = document.querySelector(".cards");
 
 var CardList =
 /*#__PURE__*/
@@ -201,32 +214,22 @@ function () {
     _classCallCheck(this, CardList);
 
     this.clearList();
-    this.renderData();
-    console.log("3 init constructor cards");
+    this.renderList();
   }
 
   _createClass(CardList, [{
     key: "clearList",
     value: function clearList() {
-      var cardsContainer = document.querySelector(".cards");
       cardsContainer.innerHTML = "";
     }
   }, {
-    key: "renderData",
-    value: function renderData() {
-      console.log("1 called renderdata()");
-      var cardsContainer = document.querySelector(".cards");
-      console.log("2 created cardscontainer");
+    key: "renderList",
+    value: function renderList() {
       fetch("/cards").then(function (res) {
         return res.json();
       }).then(function (data) {
-        console.log(" data:", data);
         data.forEach(function (card) {
-          var cardHTML = document.createElement("section");
-          cardHTML.className = "card";
-          cardHTML.innerHTML = "\n              <button class=\"card__button-close\">x</button>\n              <h3 class=\"card__title\">".concat(card.title, "</h3>\n              <p class=\"card__text\">").concat(card.text, "</p>\n              <p class=\"card__category\">").concat(card.category, "</p>");
-          console.log("before append card html", cardHTML);
-          cardsContainer.appendChild(cardHTML);
+          new _Card.Card(card.title, card.text, card.category);
         });
       });
     }
@@ -236,16 +239,13 @@ function () {
 }();
 
 exports.CardList = CardList;
-new CardList();
-},{"./Card":"js/Card.js","./Form":"js/Form.js"}],"main.js":[function(require,module,exports) {
+},{"./Form":"js/Form.js","./Card":"js/Card.js"}],"main.js":[function(require,module,exports) {
 "use strict";
 
-require("./js/CardList.js");
+var _CardList = require("./js/CardList.js");
 
-require("./js/Card.js");
-
-require("./js/Form.js");
-},{"./js/CardList.js":"js/CardList.js","./js/Card.js":"js/Card.js","./js/Form.js":"js/Form.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+new _CardList.CardList();
+},{"./js/CardList.js":"js/CardList.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -273,7 +273,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50108" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60138" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

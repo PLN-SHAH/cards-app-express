@@ -1,5 +1,3 @@
-import "./Card.js";
-import "./CardList.js";
 import { CardList } from "./CardList.js";
 
 const form = document.querySelector("form");
@@ -20,7 +18,6 @@ form.addEventListener("submit", event => {
     })
   })
     .then(res => res.json())
-    .then(createdCard => console.log("this is created card ", createdCard))
     .catch(err => console.log(err));
   new CardList();
 });
