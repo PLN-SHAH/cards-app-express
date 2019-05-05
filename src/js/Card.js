@@ -3,41 +3,55 @@ export class Card {
     this.title = title;
     this.text = text;
     this.category = category;
-    this.render(title, text, category);
+    this.render();
+    this.createButton();
+  }
+
+  createButton() {
+    const buttonDelete = document.createElement("button");
+    buttonDelete.className = "card__button-close";
+    buttonDelete.innerHTML = "x";
   }
 
   render() {
+    const buttonDelete = document.createElement("button");
     const cardsContainer = document.querySelector(".cards");
     const cardHTML = document.createElement("section");
-    const buttonDelete = document.createElement("button");
+    const cardMeta = document.createElement("section");
 
-    buttonDelete.className = "card__button-close";
     cardHTML.className = "card";
-
+    buttonDelete.className = "card__button-close";
     buttonDelete.innerHTML = "x";
 
     buttonDelete.addEventListener("click", event => {
-      const promise = fetch("/cards/", {
+      //delete on server
+      fetch("/cards/", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ title: this.title })
+        //req.body
+        body: JSON.stringify({
+          category: this.category,
+          title: this.title,
+          text: this.text
+        })
       })
         .then(res => res.json())
         .then(data => console.log("this is data obj", data));
-      console.log(promise);
+      //delete from dom
       event.target.parentNode.remove();
     });
 
-    cardHTML.innerHTML = `<section class="card__meta">
-                             <span class="card__category">
-                             ${this.category}
-                             </span>
-                          </section>
-                          <h3 class="card__title">${this.title}</h3>
+    cardMeta.classList = "card__meta";
+    cardMeta.innerHTML = `<span class="card__category"> ${
+      this.category
+    }</span>`;
+    cardMeta.appendChild(buttonDelete);
+
+    cardHTML.innerHTML = `<h3 class="card__title">${this.title}</h3>
                           <p class="card__text">${this.text}</p> `;
-    cardHTML.appendChild(buttonDelete);
+    cardHTML.insertAdjacentElement("afterbegin", cardMeta);
     cardsContainer.appendChild(cardHTML);
   }
 }

@@ -140,39 +140,55 @@ function () {
     this.title = title;
     this.text = text;
     this.category = category;
-    this.render(title, text, category);
+    this.render();
+    this.createButton();
   }
 
   _createClass(Card, [{
+    key: "createButton",
+    value: function createButton() {
+      var buttonDelete = document.createElement("button");
+      buttonDelete.className = "card__button-close";
+      buttonDelete.innerHTML = "x";
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this = this;
 
+      var buttonDelete = document.createElement("button");
       var cardsContainer = document.querySelector(".cards");
       var cardHTML = document.createElement("section");
-      var buttonDelete = document.createElement("button");
-      buttonDelete.className = "card__button-close";
+      var cardMeta = document.createElement("section");
       cardHTML.className = "card";
+      buttonDelete.className = "card__button-close";
       buttonDelete.innerHTML = "x";
       buttonDelete.addEventListener("click", function (event) {
-        var promise = fetch("/cards/", {
+        //delete on server
+        fetch("/cards/", {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json"
           },
+          //req.body
           body: JSON.stringify({
-            title: _this.title
+            category: _this.category,
+            title: _this.title,
+            text: _this.text
           })
         }).then(function (res) {
           return res.json();
         }).then(function (data) {
           return console.log("this is data obj", data);
-        });
-        console.log(promise);
+        }); //delete from dom
+
         event.target.parentNode.remove();
       });
-      cardHTML.innerHTML = "<section class=\"card__meta\">\n                             <span class=\"card__category\">\n                             ".concat(this.category, "\n                             </span>\n                          </section>\n                          <h3 class=\"card__title\">").concat(this.title, "</h3>\n                          <p class=\"card__text\">").concat(this.text, "</p> ");
-      cardHTML.appendChild(buttonDelete);
+      cardMeta.classList = "card__meta";
+      cardMeta.innerHTML = "<span class=\"card__category\"> ".concat(this.category, "</span>");
+      cardMeta.appendChild(buttonDelete);
+      cardHTML.innerHTML = "<h3 class=\"card__title\">".concat(this.title, "</h3>\n                          <p class=\"card__text\">").concat(this.text, "</p> ");
+      cardHTML.insertAdjacentElement("afterbegin", cardMeta);
       cardsContainer.appendChild(cardHTML);
     }
   }]);
@@ -222,6 +238,7 @@ function () {
       }).then(function (data) {
         data.forEach(function (card) {
           new _Card.Card(card.title, card.text, card.category);
+          console.log(card.category);
         });
       });
     }
@@ -248,29 +265,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var form = document.querySelector(".card-form");
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
-  var _event$target = event.target,
-      titleEl = _event$target.title,
-      textEl = _event$target.text,
-      categoryEl = _event$target.category;
-  fetch("/cards", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      title: titleEl.value,
-      text: textEl.value,
-      category: categoryEl
-    })
-  }).then(function (res) {
-    return console.log(res);
-  }).then(function (data) {
-    return console.log(data);
-  });
-  new _CardList.CardList();
-});
 
 var Form =
 /*#__PURE__*/
@@ -307,15 +301,15 @@ function () {
   }, {
     key: "createInput",
     value: function createInput() {
+      var inputTitle = document.createElement("input");
+      var label = document.createElement("label");
       var sectionInput = document.createElement("section");
       sectionInput.classList = "card-form__title";
-      var label = document.createElement("label");
       label.innerHTML = "Card title";
-      var inputTitle = document.createElement("input");
       inputTitle.classList = "card-form__title__input";
       inputTitle.type = "text";
       inputTitle.name = "title";
-      inputTitle.placeholder = " type in title here";
+      inputTitle.placeholder = "type in title here";
       inputTitle.required = " true";
       sectionInput.appendChild(label);
       sectionInput.appendChild(inputTitle);
@@ -352,6 +346,25 @@ function () {
 }();
 
 exports.Form = Form;
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  var _event$target = event.target,
+      titleEl = _event$target.title,
+      textEl = _event$target.text,
+      categoryEl = _event$target.category;
+  fetch("/cards", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      category: categoryEl,
+      title: titleEl.value,
+      text: textEl.value
+    })
+  });
+  new _CardList.CardList();
+});
 },{"./CardList.js":"js/CardList.js"}],"main.js":[function(require,module,exports) {
 "use strict";
 
@@ -361,6 +374,7 @@ var _Form = require("./js/Form.js");
 
 new _Form.Form();
 new _CardList.CardList();
+var cardCategoryHTML = document.querySelector(".card__category");
 },{"./js/CardList.js":"js/CardList.js","./js/Form.js":"js/Form.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -389,7 +403,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64523" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62967" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -2,26 +2,6 @@ import { CardList } from "./CardList.js";
 
 const form = document.querySelector(".card-form");
 
-form.addEventListener("submit", event => {
-  event.preventDefault();
-  const { title: titleEl, text: textEl, category: categoryEl } = event.target;
-
-  fetch("/cards", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      title: titleEl.value,
-      text: textEl.value,
-      category: categoryEl
-    })
-  })
-    .then(res => console.log(res))
-    .then(data => console.log(data));
-  new CardList();
-});
-
 export class Form {
   constructor() {
     this.render();
@@ -52,15 +32,17 @@ export class Form {
   }
 
   createInput() {
-    const sectionInput = document.createElement("section");
-    sectionInput.classList = "card-form__title";
-    const label = document.createElement("label");
-    label.innerHTML = "Card title";
     const inputTitle = document.createElement("input");
+    const label = document.createElement("label");
+    const sectionInput = document.createElement("section");
+
+    sectionInput.classList = "card-form__title";
+    label.innerHTML = "Card title";
+
     inputTitle.classList = "card-form__title__input";
     inputTitle.type = "text";
     inputTitle.name = "title";
-    inputTitle.placeholder = " type in title here";
+    inputTitle.placeholder = "type in title here";
     inputTitle.required = " true";
 
     sectionInput.appendChild(label);
@@ -98,3 +80,21 @@ export class Form {
     form.appendChild(button);
   }
 }
+
+form.addEventListener("submit", event => {
+  event.preventDefault();
+  const { title: titleEl, text: textEl, category: categoryEl } = event.target;
+
+  fetch("/cards", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      category: categoryEl,
+      title: titleEl.value,
+      text: textEl.value
+    })
+  });
+  new CardList();
+});

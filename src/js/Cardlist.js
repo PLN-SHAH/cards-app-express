@@ -18,6 +18,7 @@ export class CardList {
       .then(data => {
         data.forEach(card => {
           new Card(card.title, card.text, card.category);
+          console.log(card.category);
         });
       });
   }
