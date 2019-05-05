@@ -6,9 +6,24 @@ app.use(express.json());
 app.use(express.static("./dist"));
 
 let cards = [
-  { title: "card_one", text: "card_one_text", id: uid(), category: "1" },
-  { title: "card_two", text: "card_two_text", id: uid(), category: "2" },
-  { title: "card_three", text: "card_three_text", id: uid(), category: "3" }
+  {
+    title: "Lorem Ipsum",
+    text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr",
+    id: uid(),
+    category: "done"
+  },
+  {
+    title: "Lorem",
+    text: "sed diam nonumy eirmod tempor invidunt ut labore",
+    id: uid(),
+    category: "done"
+  },
+  {
+    title: "Ipsum",
+    text: " dolor sit amet. Lorem ipsum dolor sit",
+    id: uid(),
+    category: "doing"
+  }
 ];
 
 app.get("/cards", (req, res) => {

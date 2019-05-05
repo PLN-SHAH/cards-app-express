@@ -10,11 +10,18 @@ export class Card {
     const cardsContainer = document.querySelector(".cards");
     const cardHTML = document.createElement("section");
     cardHTML.className = "card";
-    cardHTML.innerHTML = `
-          <button class="card__button-close">x</button>
+    cardHTML.innerHTML = `<section class="card__meta">
+    <span class="card__category">${this.category}</span>
+    <button class="card__button-close">x</button></section>
           <h3 class="card__title">${this.title}</h3>
           <p class="card__text">${this.text}</p>
-          <p class="card__category">${this.category}</p>`;
+          `;
     cardsContainer.appendChild(cardHTML);
+  }
+
+  delete() {
+    this.addEventListener("click", () => {
+      this.remove();
+    });
   }
 }

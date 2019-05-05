@@ -178,8 +178,17 @@ function () {
       var cardsContainer = document.querySelector(".cards");
       var cardHTML = document.createElement("section");
       cardHTML.className = "card";
-      cardHTML.innerHTML = "\n          <button class=\"card__button-close\">x</button>\n          <h3 class=\"card__title\">".concat(this.title, "</h3>\n          <p class=\"card__text\">").concat(this.text, "</p>\n          <p class=\"card__category\">").concat(this.category, "</p>");
+      cardHTML.innerHTML = "<section class=\"card__meta\">\n    <span class=\"card__category\">".concat(this.category, "</span>\n    <button class=\"card__button-close\">x</button></section>\n          <h3 class=\"card__title\">").concat(this.title, "</h3>\n          <p class=\"card__text\">").concat(this.text, "</p>\n          ");
       cardsContainer.appendChild(cardHTML);
+    }
+  }, {
+    key: "delete",
+    value: function _delete() {
+      var _this = this;
+
+      this.addEventListener("click", function () {
+        _this.remove();
+      });
     }
   }]);
 
@@ -244,8 +253,10 @@ exports.CardList = CardList;
 
 var _CardList = require("./js/CardList.js");
 
+var _Form = require("./js/Form.js");
+
 new _CardList.CardList();
-},{"./js/CardList.js":"js/CardList.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./js/CardList.js":"js/CardList.js","./js/Form.js":"js/Form.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -273,7 +284,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60138" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51281" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

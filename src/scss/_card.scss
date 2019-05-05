@@ -8,9 +8,16 @@
   position: relative;
 }
 
-.bookmark.active::after {
-  border-color: yellow;
-  border-bottom-color: transparent;
+.card__meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.card__button-close {
+  justify-self: end;
+  width: 20px;
+  height: 20px;
 }
 
 .card__text {
@@ -31,10 +38,4 @@
 .cards {
   max-width: 500px;
   margin: 0 auto;
-}
-
-.card__button-close {
-  align-self: flex-end;
-  width: 20px;
-  height: 20px;
 }
