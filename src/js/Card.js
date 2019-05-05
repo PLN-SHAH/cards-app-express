@@ -22,7 +22,7 @@ export class Card {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ title: "Card1" })
+        body: JSON.stringify({ title: this.title })
       })
         .then(res => res.json())
         .then(data => console.log("this is data obj", data));

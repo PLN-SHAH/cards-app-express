@@ -146,6 +146,8 @@ function () {
   _createClass(Card, [{
     key: "render",
     value: function render() {
+      var _this = this;
+
       var cardsContainer = document.querySelector(".cards");
       var cardHTML = document.createElement("section");
       var buttonDelete = document.createElement("button");
@@ -159,7 +161,7 @@ function () {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            title: "Card1"
+            title: _this.title
           })
         }).then(function (res) {
           return res.json();
