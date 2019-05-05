@@ -1,12 +1,8 @@
 .card-form {
   display: flex;
   flex-direction: column;
-  padding: 20px;
   color: $dark-blue;
-  grid-gap: 20px;
   width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
 }
 
 .card-form__title {

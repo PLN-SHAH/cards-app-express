@@ -28,10 +28,6 @@ export class Form {
   }
 
   render() {
-    const form = document.createElement("form");
-    form.classList = "card-form";
-
-    document.body.appendChild(form);
     this.createInput(form);
     this.createTextArea(form);
     this.createCategory(form);

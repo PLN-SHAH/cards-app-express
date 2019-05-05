@@ -265,9 +265,6 @@ function () {
   _createClass(Form, [{
     key: "render",
     value: function render() {
-      var form = document.createElement("form");
-      form.classList = "card-form";
-      document.body.appendChild(form);
       this.createInput(form);
       this.createTextArea(form);
       this.createCategory(form);

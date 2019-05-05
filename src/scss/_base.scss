@@ -5,10 +5,20 @@
 body {
   margin: 0;
   display: grid;
-  grid-auto-flow: column;
+  grid-auto-flow: row;
   height: 100vh;
   line-height: 1.6;
   font-weight: 100;
   font-family: "Roboto", sans-serif;
   color: $dark-blue;
+
+  @media screen and (min-width: 768px) {
+    grid-auto-flow: column;
+  }
+}
+
+.card-form,
+.cards {
+  padding: 20px;
+  min-width: 300px;
 }
