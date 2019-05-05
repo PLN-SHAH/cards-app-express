@@ -117,36 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/Form.js":[function(require,module,exports) {
-"use strict";
-
-var _CardList = require("./CardList.js");
-
-var form = document.querySelector("form");
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
-  var _event$target = event.target,
-      titleEl = _event$target.title,
-      textEl = _event$target.text,
-      categoryEl = _event$target.category;
-  fetch("/cards", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      title: titleEl.value,
-      text: textEl.value,
-      category: categoryEl
-    })
-  }).then(function (res) {
-    return res.json();
-  }).catch(function (err) {
-    return console.log(err);
-  });
-  new _CardList.CardList();
-});
-},{"./CardList.js":"js/CardList.js"}],"js/Card.js":[function(require,module,exports) {
+})({"js/Card.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -177,18 +148,13 @@ function () {
     value: function render() {
       var cardsContainer = document.querySelector(".cards");
       var cardHTML = document.createElement("section");
+      var buttonDelete = document.createElement("button");
+      buttonDelete.classList = "card__button-close";
+      buttonDelete.innerHTML = "x";
       cardHTML.className = "card";
-      cardHTML.innerHTML = "<section class=\"card__meta\">\n    <span class=\"card__category\">".concat(this.category, "</span>\n    <button class=\"card__button-close\">x</button></section>\n          <h3 class=\"card__title\">").concat(this.title, "</h3>\n          <p class=\"card__text\">").concat(this.text, "</p>\n          ");
+      cardHTML.innerHTML = "<section class=\"card__meta\">\n    <span class=\"card__category\">".concat(this.category, "</span>\n    </section>\n          <h3 class=\"card__title\">").concat(this.title, "</h3>\n          <p class=\"card__text\">").concat(this.text, "</p>\n          ");
+      cardHTML.appendChild(buttonDelete);
       cardsContainer.appendChild(cardHTML);
-    }
-  }, {
-    key: "delete",
-    value: function _delete() {
-      var _this = this;
-
-      this.addEventListener("click", function () {
-        _this.remove();
-      });
     }
   }]);
 
@@ -203,8 +169,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.CardList = void 0;
-
-require("./Form");
 
 var _Card = require("./Card");
 
@@ -248,13 +212,162 @@ function () {
 }();
 
 exports.CardList = CardList;
-},{"./Form":"js/Form.js","./Card":"js/Card.js"}],"main.js":[function(require,module,exports) {
+},{"./Card":"js/Card.js"}],"js/Form.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Form = void 0;
+
+var _CardList = require("./CardList.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var form = document.querySelector("form");
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  var _event$target = event.target,
+      titleEl = _event$target.title,
+      textEl = _event$target.text,
+      categoryEl = _event$target.category;
+  fetch("/cards", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      title: titleEl.value,
+      text: textEl.value,
+      category: categoryEl
+    })
+  }).then(function (res) {
+    return res.json();
+  }).catch(function (err) {
+    return console.log(err);
+  });
+  new _CardList.CardList();
+});
+
+var Form =
+/*#__PURE__*/
+function () {
+  function Form() {
+    _classCallCheck(this, Form);
+
+    this.render();
+  }
+
+  _createClass(Form, [{
+    key: "render",
+    value: function render() {
+      var form = document.createElement("form");
+      form.classList = "card-form";
+      document.body.appendChild(form);
+      this.createInput(form);
+      this.createTextArea(form);
+      this.createCategory(form);
+      this.createSubmitButton(form);
+    }
+  }, {
+    key: "createTextArea",
+    value: function createTextArea() {
+      var sectionTextarea = document.createElement("section");
+      sectionTextarea.classList = "card-form__text";
+      var label = document.createElement("label");
+      var textarea = document.createElement("textarea");
+      console.log(textarea);
+      label.innerHTML = "Card title";
+      textarea.classList = "card-form__textarea";
+      textarea.name = "text";
+      textarea.placeholder = "type in text here";
+      sectionTextarea.appendChild(label);
+      sectionTextarea.appendChild(textarea);
+      form.appendChild(sectionTextarea);
+    }
+  }, {
+    key: "createInput",
+    value: function createInput() {
+      var sectionInput = document.createElement("section");
+      sectionInput.classList = "card-form__title";
+      var label = document.createElement("label");
+      label.innerHTML = "Card title";
+      var inputTitle = document.createElement("input");
+      inputTitle.classList = "card-form__title__input";
+      inputTitle.type = "text";
+      inputTitle.name = "title";
+      inputTitle.placeholder = " type in title here";
+      inputTitle.required = " true";
+      sectionInput.appendChild(label);
+      sectionInput.appendChild(inputTitle);
+      form.appendChild(sectionInput);
+      console.log(sectionInput);
+    }
+  }, {
+    key: "createCategory",
+    value: function createCategory() {
+      var sectionCategory = document.createElement("section");
+      sectionCategory.classList = "card-form__category";
+      var label = document.createElement("label");
+      label.innerHTML = "Category";
+      var inputCategory = document.createElement("input");
+      inputCategory.classList = "card-form__category__input";
+      inputCategory.type = "text";
+      inputCategory.name = "category";
+      inputCategory.required = " true";
+      sectionCategory.appendChild(label);
+      sectionCategory.appendChild(inputCategory);
+      form.appendChild(sectionCategory);
+      console.log(sectionCategory);
+    }
+  }, {
+    key: "createSubmitButton",
+    value: function createSubmitButton() {
+      var button = document.createElement("button");
+      button.classList = "card-form__button";
+      button.type = "submit";
+      button.innerHTML = "Create new card";
+      form.appendChild(button);
+    }
+  }]);
+
+  return Form;
+}();
+/*
+<section class="card-form__category">
+  <label for="category">Card category</label>
+  <textarea
+    class="card-form__category"
+    name="category"
+    placeholder="categorytext here..."
+  />
+</section>;*/
+
+/*
+<section class="card-form__text">
+  <label for="text">Card text</label>
+  <textarea
+    class="card-form__textarea"
+    name="text"
+    placeholder="type text here..."
+  />
+</section>;
+*/
+
+
+exports.Form = Form;
+},{"./CardList.js":"js/CardList.js"}],"main.js":[function(require,module,exports) {
 "use strict";
 
 var _CardList = require("./js/CardList.js");
 
 var _Form = require("./js/Form.js");
 
+new _Form.Form();
 new _CardList.CardList();
 },{"./js/CardList.js":"js/CardList.js","./js/Form.js":"js/Form.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -284,7 +397,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51281" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62678" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
