@@ -274,12 +274,11 @@ function () {
     key: "createTextArea",
     value: function createTextArea() {
       var sectionTextarea = document.createElement("section");
-      sectionTextarea.classList = "card-form__text";
-      var label = document.createElement("label");
       var textarea = document.createElement("textarea");
-      console.log(textarea);
-      label.innerHTML = "Card title";
+      var label = document.createElement("label");
+      sectionTextarea.classList = "card-form__text";
       textarea.classList = "card-form__textarea";
+      label.innerHTML = "Card title";
       textarea.name = "text";
       textarea.placeholder = "type in text here";
       sectionTextarea.appendChild(label);
@@ -302,24 +301,22 @@ function () {
       sectionInput.appendChild(label);
       sectionInput.appendChild(inputTitle);
       form.appendChild(sectionInput);
-      console.log(sectionInput);
     }
   }, {
     key: "createCategory",
     value: function createCategory() {
       var sectionCategory = document.createElement("section");
-      sectionCategory.classList = "card-form__category";
       var label = document.createElement("label");
-      label.innerHTML = "Category";
       var inputCategory = document.createElement("input");
+      sectionCategory.classList = "card-form__category";
       inputCategory.classList = "card-form__category__input";
+      label.innerHTML = "Category";
       inputCategory.type = "text";
       inputCategory.name = "category";
       inputCategory.required = " true";
       sectionCategory.appendChild(label);
       sectionCategory.appendChild(inputCategory);
       form.appendChild(sectionCategory);
-      console.log(sectionCategory);
     }
   }, {
     key: "createSubmitButton",
@@ -334,27 +331,6 @@ function () {
 
   return Form;
 }();
-/*
-<section class="card-form__category">
-  <label for="category">Card category</label>
-  <textarea
-    class="card-form__category"
-    name="category"
-    placeholder="categorytext here..."
-  />
-</section>;*/
-
-/*
-<section class="card-form__text">
-  <label for="text">Card text</label>
-  <textarea
-    class="card-form__textarea"
-    name="text"
-    placeholder="type text here..."
-  />
-</section>;
-*/
-
 
 exports.Form = Form;
 },{"./CardList.js":"js/CardList.js"}],"main.js":[function(require,module,exports) {

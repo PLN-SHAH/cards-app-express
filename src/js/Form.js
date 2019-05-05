@@ -36,14 +36,13 @@ export class Form {
 
   createTextArea() {
     const sectionTextarea = document.createElement("section");
-    sectionTextarea.classList = "card-form__text";
-    const label = document.createElement("label");
     const textarea = document.createElement("textarea");
-    console.log(textarea);
+    const label = document.createElement("label");
+
+    sectionTextarea.classList = "card-form__text";
+    textarea.classList = "card-form__textarea";
 
     label.innerHTML = "Card title";
-
-    textarea.classList = "card-form__textarea";
     textarea.name = "text";
     textarea.placeholder = "type in text here";
 
@@ -68,16 +67,17 @@ export class Form {
     sectionInput.appendChild(inputTitle);
 
     form.appendChild(sectionInput);
-    console.log(sectionInput);
   }
 
   createCategory() {
     const sectionCategory = document.createElement("section");
-    sectionCategory.classList = "card-form__category";
     const label = document.createElement("label");
-    label.innerHTML = "Category";
     const inputCategory = document.createElement("input");
+
+    sectionCategory.classList = "card-form__category";
     inputCategory.classList = "card-form__category__input";
+
+    label.innerHTML = "Category";
     inputCategory.type = "text";
     inputCategory.name = "category";
     inputCategory.required = " true";
@@ -86,35 +86,15 @@ export class Form {
     sectionCategory.appendChild(inputCategory);
 
     form.appendChild(sectionCategory);
-    console.log(sectionCategory);
   }
 
   createSubmitButton() {
     const button = document.createElement("button");
+
     button.classList = "card-form__button";
     button.type = "submit";
     button.innerHTML = "Create new card";
+
     form.appendChild(button);
   }
 }
-
-/*
-<section class="card-form__category">
-  <label for="category">Card category</label>
-  <textarea
-    class="card-form__category"
-    name="category"
-    placeholder="categorytext here..."
-  />
-</section>;*/
-
-/*
-<section class="card-form__text">
-  <label for="text">Card text</label>
-  <textarea
-    class="card-form__textarea"
-    name="text"
-    placeholder="type text here..."
-  />
-</section>;
-*/
