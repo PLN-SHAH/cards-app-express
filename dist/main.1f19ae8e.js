@@ -117,52 +117,39 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"main.js":[function(require,module,exports) {
-"use strict";
+})({"js/Card.js":[function(require,module,exports) {
+/* import "./Cardlist";
+import "./Form";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Card = exports.Cards = void 0;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Cards =
-/*#__PURE__*/
-function () {
-  function Cards() {
-    _classCallCheck(this, Cards);
-
-    this.renderData();
+export class Card {
+  constructor(title, text, category) {
+    this.title = title;
+    this.text = text;
+    this.category = category;
+    this.render();
   }
 
-  _createClass(Cards, [{
-    key: "renderData",
-    value: function renderData() {
-      fetch("/cards").then(function (res) {
-        return res.json();
-      }).then(function (data) {
-        console.log("data is ", data[0].title);
-        data.forEach(function (card) {
-          var cardHTML = document.createElement("section");
-          var cardsContainer = document.querySelector(".cards");
-          cardHTML.className = "card";
-          cardHTML.innerHTML = "\n            <button class=\"card__button-close\">x</button>\n            <h3 class=\"card__title\">".concat(card.title, "</h3>\n            <p class=\"card__text\">").concat(card.text, "</p>\n            <p class=\"card__category\">").concat(card.category, "</p>");
-          cardsContainer.appendChild(cardHTML);
-        });
-      });
-    }
-  }]);
+  render() {
+    const cardHTML = document.createElement("section");
+    const cardsContainer = document.querySelector(".cards");
+    cardHTML.className = "card";
+    cardHTML.innerHTML = `
+          <button class="card__button-close">x</button>
+          <h3 class="card__title">${this.title}</h3>
+          <p class="card__text">${this.text}</p>
+          <p class="card__category">${this.category}</p>`;
 
-  return Cards;
-}();
+    cardsContainer.appendChild(cardHTML);
+  }
+}
+ */
+},{}],"js/Form.js":[function(require,module,exports) {
+"use strict";
 
-exports.Cards = Cards;
-new Cards();
+require("./Card.js");
+
+var _CardList = require("./CardList.js");
+
 var form = document.querySelector("form");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -183,41 +170,82 @@ form.addEventListener("submit", function (event) {
   }).then(function (res) {
     return res.json();
   }).then(function (createdCard) {
-    return console.log(createdCard);
+    return console.log("this is created card ", createdCard);
   }).catch(function (err) {
     return console.log(err);
   });
-  new Card(titleEl.value, textEl.value, categoryEl.value);
+  new _CardList.CardList();
 });
+},{"./Card.js":"js/Card.js","./CardList.js":"js/CardList.js"}],"js/CardList.js":[function(require,module,exports) {
+"use strict";
 
-var Card =
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CardList = void 0;
+
+require("./Card");
+
+require("./Form");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var CardList =
 /*#__PURE__*/
 function () {
-  function Card(title, text, category) {
-    _classCallCheck(this, Card);
+  function CardList() {
+    _classCallCheck(this, CardList);
 
-    this.title = title;
-    this.text = text;
-    this.category = category;
-    this.render();
+    this.clearList();
+    this.renderData();
+    console.log("3 init constructor cards");
   }
 
-  _createClass(Card, [{
-    key: "render",
-    value: function render() {
-      var cardHTML = document.createElement("section");
+  _createClass(CardList, [{
+    key: "clearList",
+    value: function clearList() {
       var cardsContainer = document.querySelector(".cards");
-      cardHTML.className = "card";
-      cardHTML.innerHTML = "\n        <button class=\"card__button-close\">x</button>\n        <h3 class=\"card__title\">".concat(this.title, "</h3>\n        <p class=\"card__text\">").concat(this.text, "</p>\n        <p class=\"card__category\">").concat(this.category, "</p>");
-      cardsContainer.appendChild(cardHTML);
+      cardsContainer.innerHTML = "";
+    }
+  }, {
+    key: "renderData",
+    value: function renderData() {
+      console.log("1 called renderdata()");
+      var cardsContainer = document.querySelector(".cards");
+      console.log("2 created cardscontainer");
+      fetch("/cards").then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        console.log(" data:", data);
+        data.forEach(function (card) {
+          var cardHTML = document.createElement("section");
+          cardHTML.className = "card";
+          cardHTML.innerHTML = "\n              <button class=\"card__button-close\">x</button>\n              <h3 class=\"card__title\">".concat(card.title, "</h3>\n              <p class=\"card__text\">").concat(card.text, "</p>\n              <p class=\"card__category\">").concat(card.category, "</p>");
+          console.log("before append card html", cardHTML);
+          cardsContainer.appendChild(cardHTML);
+        });
+      });
     }
   }]);
 
-  return Card;
+  return CardList;
 }();
 
-exports.Card = Card;
-},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+exports.CardList = CardList;
+new CardList();
+},{"./Card":"js/Card.js","./Form":"js/Form.js"}],"main.js":[function(require,module,exports) {
+"use strict";
+
+require("./js/CardList.js");
+
+require("./js/Card.js");
+
+require("./js/Form.js");
+},{"./js/CardList.js":"js/CardList.js","./js/Card.js":"js/Card.js","./js/Form.js":"js/Form.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -245,7 +273,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59444" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50108" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
